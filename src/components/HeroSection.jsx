@@ -49,7 +49,7 @@ export default function HeroSection({ onOpenHireModal }) {
 
               {/* Download Verified CV */}
               <a
-                href="/images/sreejith resume.pdf"
+                href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}
                 download="Sreejith_V_P_Resume.pdf"
                 className="px-6 py-3.5 rounded-xl font-display text-sm font-medium tracking-wider uppercase bg-[#12131A] hover:bg-[#181922] border border-[#1F202B] hover:border-[#2D3042] text-[#F8FAFC] transition-colors duration-200 flex items-center gap-2"
               >

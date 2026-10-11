@@ -33,7 +33,11 @@ export default function ProfileCard() {
         {/* Clean, Rounded Frame */}
         <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-[#252530] shadow-xl group-hover:border-[#8B5CF6]/50 transition-colors bg-[#0E0F15]">
           <img
-            src="/images/sreejith-avatar.jpg"
+            src={`${import.meta.env.BASE_URL}images/sreejith-avatar.png`}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = `${import.meta.env.BASE_URL}images/sreejith-avatar.jpg`;
+            }}
             alt="Sreejith V P - Animated Portrait"
             className="w-full h-full object-cover object-top filter contrast-105 transition-transform duration-500 group-hover:scale-105"
           />

@@ -154,7 +154,7 @@ export default function RecruitmentContact() {
                 Verified background as LEAD College Media Head, Brandaid Digital Manager, and SICOMS B.Com.
               </p>
               <a
-                href="/images/sreejith resume.pdf"
+                href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}
                 download="Sreejith_V_P_Resume.pdf"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#181922] hover:bg-[#1F202B] border border-[#1F202B] hover:border-[#2D3042] text-[#F8FAFC] font-display font-medium text-xs uppercase tracking-wider transition-colors"
               >

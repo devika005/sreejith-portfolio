@@ -157,7 +157,7 @@ export default function HireModal({ isOpen, onClose }) {
                 <span>Direct Contact</span>
               </div>
               <a
-                href="/images/sreejith resume.pdf"
+                href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}
                 download="Sreejith_V_P_Resume.pdf"
                 className="text-[#A78BFA] hover:underline flex items-center gap-1"
               >

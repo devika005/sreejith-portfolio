@@ -81,7 +81,7 @@ export default function Navbar({ onOpenHireModal }) {
         <div className="flex items-center gap-3">
           {/* Direct Download CV */}
           <a
-            href="/images/sreejith resume.pdf"
+            href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}
             download="Sreejith_V_P_Resume.pdf"
             className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium bg-[#12131A] border border-[#1F202B] text-[#94A3B8] hover:text-[#F8FAFC] hover:border-[#2D3042] transition-colors"
           >
@@ -156,7 +156,7 @@ export default function Navbar({ onOpenHireModal }) {
               Contact
             </a>
             <a
-              href="/images/sreejith resume.pdf"
+              href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}
               download="Sreejith_V_P_Resume.pdf"
               className="py-2 text-[#8B5CF6] flex items-center gap-2"
             >

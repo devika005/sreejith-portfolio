@@ -53,7 +53,7 @@ export default function Footer() {
           </a>
 
           <a
-            href="/images/sreejith resume.pdf"
+            href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}
             download="Sreejith_V_P_Resume.pdf"
             className="hover:text-[#F8FAFC] transition-colors flex items-center gap-1.5"
           >
