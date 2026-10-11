@@ -2,9 +2,10 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 import { InstagramIcon } from './Icons';
 
-export default function ProfileCard() {
-  const baseUrl = import.meta.env.BASE_URL;
+// Directly import the image file so Vite bundles it into dist/assets
+import avatarImg from '../../public/images/sreejith-avatar.png';
 
+export default function ProfileCard() {
   return (
     <div className="w-full max-w-sm rounded-2xl bg-[#12131A] border border-[#1F202B] p-6 shadow-xl relative overflow-hidden group">
 
@@ -35,15 +36,7 @@ export default function ProfileCard() {
         {/* Clean, Rounded Frame */}
         <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-[#252530] shadow-xl group-hover:border-[#8B5CF6]/50 transition-colors bg-[#0E0F15]">
           <img
-            src={`${baseUrl}images/sreejith-avatar.jpg.png`}
-            onError={(e) => {
-              // Failover sequence to catch whichever extension exists in public/images
-              if (e.currentTarget.src.endsWith('sreejith-avatar.jpg.png')) {
-                e.currentTarget.src = `${baseUrl}images/sreejith-avatar.png`;
-              } else if (e.currentTarget.src.endsWith('sreejith-avatar.png')) {
-                e.currentTarget.src = `${baseUrl}images/sreejith-avatar.jpg`;
-              }
-            }}
+            src={avatarImg}
             alt="Sreejith V P - Animated Portrait"
             className="w-full h-full object-cover object-top filter contrast-105 transition-transform duration-500 group-hover:scale-105"
           />
