@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #090A0F;
+    --card-surface: #12131A;
+    --border-subtle: #1F202B;
+    --text-primary: #F8FAFC;
+    --text-body: #94A3B8;
+    --accent-violet: #8B5CF6;
+  }
+
+  body {
+    background-color: #090A0F;
+    color: #F8FAFC;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Refined, Minimal Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #090A0F;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1F202B;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2E3040;
+  }
+}
+
+/* Card Surface Styling */
+.card-surface {
+  background-color: #12131A;
+  border: 1px solid #1F202B;
+}
+
+.card-surface-hover {
+  transition: all 0.25s ease-in-out;
+}
+.card-surface-hover:hover {
+  border-color: #2D3042;
+  background-color: #151720;
+}
+
+/* Crisp Editorial Gradient Text */
+.text-editorial-gradient {
+  background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 60%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle violet accent text */
+.text-accent-violet {
+  color: #A78BFA;
+}
