@@ -3,9 +3,11 @@ import { MapPin } from 'lucide-react';
 import { InstagramIcon } from './Icons';
 
 export default function ProfileCard() {
+  const baseUrl = import.meta.env.BASE_URL;
+
   return (
     <div className="w-full max-w-sm rounded-2xl bg-[#12131A] border border-[#1F202B] p-6 shadow-xl relative overflow-hidden group">
-      
+
       {/* Top Header Row */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
@@ -33,10 +35,14 @@ export default function ProfileCard() {
         {/* Clean, Rounded Frame */}
         <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-[#252530] shadow-xl group-hover:border-[#8B5CF6]/50 transition-colors bg-[#0E0F15]">
           <img
-            src={`${import.meta.env.BASE_URL}images/sreejith-avatar.png`}
+            src={`${baseUrl}images/sreejith-avatar.jpg.png`}
             onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = `${import.meta.env.BASE_URL}images/sreejith-avatar.jpg`;
+              // Failover sequence to catch whichever extension exists in public/images
+              if (e.currentTarget.src.endsWith('sreejith-avatar.jpg.png')) {
+                e.currentTarget.src = `${baseUrl}images/sreejith-avatar.png`;
+              } else if (e.currentTarget.src.endsWith('sreejith-avatar.png')) {
+                e.currentTarget.src = `${baseUrl}images/sreejith-avatar.jpg`;
+              }
             }}
             alt="Sreejith V P - Animated Portrait"
             className="w-full h-full object-cover object-top filter contrast-105 transition-transform duration-500 group-hover:scale-105"
