@@ -10,6 +10,9 @@ import ProfileCard from './ProfileCard';
 import { InstagramIcon } from './Icons';
 
 export default function HeroSection({ onOpenHireModal }) {
+  // Use Vite's base URL helper to guarantee proper pathing on GitHub Pages sub-directories
+  const baseUrl = import.meta.env.BASE_URL;
+
   return (
     <section id="hero" className="relative min-h-[90vh] pt-32 pb-20 flex flex-col justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10">
@@ -49,7 +52,7 @@ export default function HeroSection({ onOpenHireModal }) {
 
               {/* Download Verified CV */}
               <a
-                href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}
+                href={`${baseUrl}images/sreejith resume.pdf`}
                 download="Sreejith_V_P_Resume.pdf"
                 className="px-6 py-3.5 rounded-xl font-display text-sm font-medium tracking-wider uppercase bg-[#12131A] hover:bg-[#181922] border border-[#1F202B] hover:border-[#2D3042] text-[#F8FAFC] transition-colors duration-200 flex items-center gap-2"
               >
