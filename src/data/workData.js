@@ -112,3 +112,4 @@ export const WORK_PROJECTS = {
 export const VERIFIED_COLLECTIONS = WORK_PROJECTS;
 export const VERIFIED_PROJECTS = WORK_PROJECTS;
 export default WORK_PROJECTS;
+
