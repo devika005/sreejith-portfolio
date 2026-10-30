@@ -9,106 +9,18 @@ import {
   Compass
 } from 'lucide-react';
 import { InstagramIcon } from './Icons';
+import { WORK_PROJECTS, sanitizeInstagramUrl, extractReelId } from '../data/workData';
 
-export const VERIFIED_COLLECTIONS = {
-  professional: [
-    {
-      id: "ica-1",
-      reelId: "DfGo-AgCz61",
-      title: "Indian Culinary Academy Reel 01",
-      client: "Indian Culinary Academy, Bangalore",
-      category: "Culinary Videography & Editing",
-      role: "Videographer & Video Editor",
-      reelUrl: "https://www.instagram.com/reel/DfGo-AgCz61/",
-      tags: ["Culinary Reel", "Fast Pacing", "Color Grading"],
-      badge: "INDIAN CULINARY ACADEMY"
-    },
-    {
-      id: "ica-2",
-      reelId: "DfEh-lZCzZW",
-      title: "Indian Culinary Academy Reel 02",
-      client: "Indian Culinary Academy, Bangalore",
-      category: "Culinary Arts & Campus Production",
-      role: "Videographer & Video Editor",
-      reelUrl: "https://www.instagram.com/reel/DfEh-lZCzZW/",
-      tags: ["Kitchen Production", "Sound Design", "Vertical Reel"],
-      badge: "INDIAN CULINARY ACADEMY"
-    },
-    {
-      id: "prof-1",
-      reelId: "DdBwNtwOuw0",
-      title: "Commercial Campaign Reel 01",
-      client: "Commercial & Agency Roster",
-      category: "Commercial Videography & Editing",
-      role: "Videographer & Video Editor",
-      reelUrl: "https://www.instagram.com/reel/DdBwNtwOuw0/",
-      tags: ["Video Editing", "Commercial Shoot", "Post-Production"],
-      badge: "COMMERCIAL CAMPAIGN"
-    },
-    {
-      id: "prof-2",
-      reelId: "DVlUeCwk4xA",
-      title: "LEAD College Media Reel 02",
-      client: "LEAD College Autonomous",
-      category: "Institutional Campus Media",
-      role: "Media Head Direction",
-      reelUrl: "https://www.instagram.com/reel/DVlUeCwk4xA/",
-      tags: ["Campus Leadership", "Institutional Anthem", "Videography"],
-      badge: "LEAD AUTONOMOUS"
-    },
-    {
-      id: "prof-3",
-      reelId: "DVYKVxrk6Fy",
-      title: "Social Campaign Reel 03",
-      client: "Brandaid Digital / Campaign Roster",
-      category: "Commercial Social Campaign",
-      role: "Videography & Editing",
-      reelUrl: "https://www.instagram.com/reel/DVYKVxrk6Fy/",
-      tags: ["Social Strategy", "Reels", "Visual Pacing"],
-      badge: "AGENCY PRODUCTION"
-    }
-  ],
-  personal: [
-    {
-      id: "pers-1",
-      reelId: "DeGYfs6zFKv",
-      title: "Creative POV Experiment 01",
-      client: "@check.my_pov",
-      category: "Independent Creative Project",
-      role: "Visual Storyteller & Editor",
-      reelUrl: "https://www.instagram.com/reel/DeGYfs6zFKv/",
-      tags: ["Creative Editing", "Color Grading", "Visual Pacing"],
-      badge: "PERSONAL EXPERIMENT"
-    },
-    {
-      id: "pers-2",
-      reelId: "Dd5hXn_zYUM",
-      title: "Creative POV Experiment 02",
-      client: "@check.my_pov",
-      category: "Passion Project / Street Visuals",
-      role: "Atmospheric Videography",
-      reelUrl: "https://www.instagram.com/reel/Dd5hXn_zYUM/",
-      tags: ["POV Videography", "Atmospheric", "Visual Rhythm"],
-      badge: "STREET PERSPECTIVE"
-    },
-    {
-      id: "pers-3",
-      reelId: "DeOu3j9z6HM",
-      title: "Creative POV Experiment 03",
-      client: "@check.my_pov",
-      category: "Passion Project / Editing Rhythm",
-      role: "Editing & Sound Pacing",
-      reelUrl: "https://www.instagram.com/reel/DeOu3j9z6HM/",
-      tags: ["Vlog Aesthetic", "Visual Rhythm", "Content Creation"],
-      badge: "PASSION REEL"
-    }
-  ]
-};
+export const VERIFIED_COLLECTIONS = WORK_PROJECTS;
 
 // Backward-compatible export
 export const VERIFIED_PROJECTS = VERIFIED_COLLECTIONS;
 
 function ReelCard({ item, embedMode }) {
+  // Clean reelId and URL to ensure tracking params like ?psln= or ?cplk= are stripped
+  const cleanId = extractReelId(item.reelId || item.reelUrl);
+  const cleanUrl = sanitizeInstagramUrl(item.reelUrl || `https://www.instagram.com/reel/${cleanId}/`);
+
   return (
     <div className="rounded-2xl overflow-hidden bg-[#12131A] border border-[#1F202B] hover:border-[#2D3042] transition-colors flex flex-col justify-between">
       {/* Card Header */}
@@ -126,7 +38,7 @@ function ReelCard({ item, embedMode }) {
         </div>
 
         <a
-          href={item.reelUrl}
+          href={cleanUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="w-8 h-8 rounded-lg bg-[#181922] hover:bg-[#8B5CF6] text-[#94A3B8] hover:text-white border border-[#1F202B] flex items-center justify-center transition-colors flex-shrink-0"
@@ -140,7 +52,7 @@ function ReelCard({ item, embedMode }) {
       <div className="relative w-full bg-[#090A0F] flex items-center justify-center overflow-hidden min-h-[460px]">
         {embedMode ? (
           <iframe
-            src={`https://www.instagram.com/reel/${item.reelId}/embed/`}
+            src={`https://www.instagram.com/reel/${cleanId}/embed/`}
             className="w-full h-[480px] border-0"
             allowTransparency="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -196,7 +108,7 @@ function ReelCard({ item, embedMode }) {
         </div>
 
         <a
-          href={item.reelUrl}
+          href={cleanUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full py-2.5 rounded-lg bg-[#181922] hover:bg-[#8B5CF6] text-[#F8FAFC] hover:text-white border border-[#1F202B] hover:border-[#8B5CF6] text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 group"

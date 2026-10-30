@@ -62,7 +62,7 @@ export default function ProfileCard() {
         <div className="flex items-start justify-between gap-2">
           <span className="text-zinc-500 font-mono flex-shrink-0">Current Role</span>
           <span className="text-[#F8FAFC] font-medium text-right text-[11px] sm:text-xs">
-            Videographer &amp; Editor at Indian Culinary Academy, Bangalore
+            Videographer &amp; Editor - Indian Culinary Academy
           </span>
         </div>
         <div className="flex items-center justify-between">
