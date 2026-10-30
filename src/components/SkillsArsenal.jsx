@@ -143,7 +143,7 @@ export default function SkillsArsenal() {
 
           <div className="flex items-center gap-2 text-zinc-400">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>Palakkad, Kerala &bull; Available for on-location shoots and remote editing contracts</span>
+            <span>Bangalore, Karnataka &bull; Available for on-location shoots and remote editing contracts</span>
           </div>
         </div>
 

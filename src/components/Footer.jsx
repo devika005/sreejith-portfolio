@@ -17,10 +17,10 @@ export default function Footer() {
             SREEJITH V P
           </div>
           <p className="text-xs text-[#94A3B8] max-w-sm">
-            Media Head &bull; Videographer &bull; Video Editor &bull; Content Creator
+            Videographer &bull; Video Editor &bull; Media Creator
           </p>
           <div className="text-[11px] font-mono text-zinc-500 mt-1">
-            Palakkad, Kerala &bull; 100+ Videos Produced &bull; 2M+ Organic Views
+            Bangalore, Karnataka &bull; 100+ Videos Produced &bull; 2M+ Organic Views
           </div>
         </div>
 

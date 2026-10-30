@@ -19,10 +19,12 @@ export default function HeroSection({ onOpenHireModal }) {
         
         {/* Subtle Identity Pill */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#12131A] border border-[#1F202B] text-xs font-mono tracking-wider text-[#94A3B8] mb-8">
-          <span className="w-2 h-2 rounded-full bg-[#8B5CF6]" />
-          <span>LEAD College Autonomous Media Head</span>
+          <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse" />
+          <span>Indian Culinary Academy</span>
           <span className="text-zinc-600">&bull;</span>
-          <span>Palakkad, Kerala</span>
+          <span>Videographer &amp; Editor</span>
+          <span className="text-zinc-600">&bull;</span>
+          <span>Bangalore, Karnataka</span>
         </div>
 
         {/* Main Grid: Headline & CTAs on Left, Professional Portrait Card on Right */}
@@ -36,7 +38,7 @@ export default function HeroSection({ onOpenHireModal }) {
             </h1>
 
             <p className="text-base sm:text-xl text-[#94A3B8] font-light max-w-2xl leading-relaxed mb-8">
-              Hi, I'm <strong className="text-[#F8FAFC] font-semibold">Sreejith V P</strong> &mdash; a videographer, video editor, and media head. I produce high-impact brand campaigns, institutional documentaries, and high-retention vertical reels, with over <span className="text-[#F8FAFC] font-medium">100+ videos produced</span> and <span className="text-[#F8FAFC] font-medium">2M+ organic views</span>.
+              Hi, I'm <strong className="text-[#F8FAFC] font-semibold">Sreejith V P</strong> &mdash; a videographer, video editor, and media creator based in <span className="text-[#F8FAFC] font-medium">Bangalore, Karnataka</span>. Currently producing culinary &amp; brand campaigns at <span className="text-[#F8FAFC] font-medium">Indian Culinary Academy</span>, with over <span className="text-[#F8FAFC] font-medium">100+ videos produced</span> and <span className="text-[#F8FAFC] font-medium">2M+ organic views</span>.
             </p>
 
             {/* Clean, Grounded Action Buttons */}
@@ -102,11 +104,11 @@ export default function HeroSection({ onOpenHireModal }) {
           </div>
 
           <div className="p-4 rounded-xl bg-[#12131A] border border-[#1F202B]">
-            <div className="font-display font-bold text-2xl md:text-3xl text-[#F8FAFC]">
-              LEAD College
+            <div className="font-display font-bold text-lg sm:text-xl md:text-2xl text-[#F8FAFC] leading-tight">
+              Indian Culinary Academy
             </div>
             <div className="text-xs uppercase tracking-wider text-[#94A3B8] font-mono mt-1">
-              Media Head (Autonomous)
+              Videographer &amp; Editor
             </div>
           </div>
 

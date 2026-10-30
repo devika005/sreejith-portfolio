@@ -61,7 +61,7 @@ export default function RecruitmentContact() {
                 Let's Discuss Your Project.
               </h2>
               <p className="text-sm md:text-base text-[#94A3B8] font-light leading-relaxed">
-                Currently serving as Media Head at LEAD College Autonomous while collaborating with brands, agencies, and creators for video production and short-form retainers.
+                Currently serving as Videographer &amp; Editor at Indian Culinary Academy, Bangalore while collaborating with brands, agencies, and creators for video production and short-form retainers.
               </p>
             </div>
 
@@ -136,7 +136,7 @@ export default function RecruitmentContact() {
                     Location
                   </span>
                   <span className="text-xs sm:text-sm font-mono text-[#F8FAFC]">
-                    Palakkad, Kerala, India &bull; Open for On-Location &amp; Remote
+                    Bangalore, Karnataka, India &bull; Open for On-Location &amp; Remote
                   </span>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default function RecruitmentContact() {
                 </h3>
               </div>
               <p className="text-xs text-[#94A3B8] font-light mb-4">
-                Verified background as LEAD College Media Head, Brandaid Digital Manager, and SICOMS B.Com.
+                Verified background at Indian Culinary Academy, LEAD College Autonomous, Brandaid Digital, and SICOMS B.Com.
               </p>
               <a
                 href={`${import.meta.env.BASE_URL}images/sreejith resume.pdf`}

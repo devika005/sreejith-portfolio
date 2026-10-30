@@ -13,15 +13,37 @@ import { InstagramIcon } from './Icons';
 export const VERIFIED_COLLECTIONS = {
   professional: [
     {
+      id: "ica-1",
+      reelId: "DfGo-AgCz61",
+      title: "Indian Culinary Academy Reel 01",
+      client: "Indian Culinary Academy, Bangalore",
+      category: "Culinary Videography & Editing",
+      role: "Videographer & Video Editor",
+      reelUrl: "https://www.instagram.com/reel/DfGo-AgCz61/",
+      tags: ["Culinary Reel", "Fast Pacing", "Color Grading"],
+      badge: "INDIAN CULINARY ACADEMY"
+    },
+    {
+      id: "ica-2",
+      reelId: "DfEh-lZCzZW",
+      title: "Indian Culinary Academy Reel 02",
+      client: "Indian Culinary Academy, Bangalore",
+      category: "Culinary Arts & Campus Production",
+      role: "Videographer & Video Editor",
+      reelUrl: "https://www.instagram.com/reel/DfEh-lZCzZW/",
+      tags: ["Kitchen Production", "Sound Design", "Vertical Reel"],
+      badge: "INDIAN CULINARY ACADEMY"
+    },
+    {
       id: "prof-1",
       reelId: "DdBwNtwOuw0",
       title: "Commercial Campaign Reel 01",
-      client: "Past Client & Agency Work",
+      client: "Commercial & Agency Roster",
       category: "Commercial Videography & Editing",
       role: "Videographer & Video Editor",
       reelUrl: "https://www.instagram.com/reel/DdBwNtwOuw0/",
       tags: ["Video Editing", "Commercial Shoot", "Post-Production"],
-      badge: "PROFESSIONAL WORK"
+      badge: "COMMERCIAL CAMPAIGN"
     },
     {
       id: "prof-2",
@@ -119,9 +141,10 @@ function ReelCard({ item, embedMode }) {
         {embedMode ? (
           <iframe
             src={`https://www.instagram.com/reel/${item.reelId}/embed/`}
-            className="w-full h-[470px] border-0"
+            className="w-full h-[480px] border-0"
             allowTransparency="true"
-            allow="encrypted-media"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            scrolling="no"
             loading="lazy"
             title={item.title}
           />
@@ -222,16 +245,16 @@ export default function PortfolioShowcase() {
             </div>
             
             <h2 className="font-display font-bold text-2xl sm:text-4xl uppercase tracking-tight text-[#F8FAFC] mb-3">
-              01 &mdash; PROFESSIONAL CAMPAIGN WORK
+              01 &mdash; PROFESSIONAL &amp; CULINARY CAMPAIGN WORK
             </h2>
             
             <p className="text-sm sm:text-base text-[#94A3B8] font-light leading-relaxed">
-              Verified video editing, videography, and campaign execution for past agency roles and institutional leadership.
+              Verified culinary videography, short-form reels, and commercial campaigns for Indian Culinary Academy, past institutional leadership, and agency client rosters.
             </p>
           </div>
 
-          {/* 3-Card Grid for Professional Work */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Responsive Card Grid for Professional Work */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {VERIFIED_COLLECTIONS.professional.map((item) => (
               <ReelCard key={item.id} item={item} embedMode={embedMode} />
             ))}

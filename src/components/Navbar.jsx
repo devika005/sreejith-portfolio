@@ -38,7 +38,7 @@ export default function Navbar({ onOpenHireModal }) {
               SREEJITH V P
             </div>
             <div className="text-[11px] uppercase tracking-wider text-[#94A3B8]">
-              Media Head &bull; Content Creator
+              Videographer &amp; Editor &bull; Media Creator
             </div>
           </div>
         </a>

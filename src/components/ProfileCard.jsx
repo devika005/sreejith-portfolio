@@ -49,18 +49,24 @@ export default function ProfileCard() {
           Sreejith V P
         </h3>
         <p className="text-xs text-[#94A3B8] font-medium mt-1">
-          Media Head &bull; Videographer &bull; Editor
+          Videographer &bull; Video Editor &bull; Media Creator
         </p>
         <div className="text-xs font-mono text-[#A78BFA] flex items-center justify-center gap-1 mt-1.5">
           <MapPin className="w-3.5 h-3.5 text-[#8B5CF6]" />
-          <span>Palakkad, Kerala</span>
+          <span>Bangalore, Karnataka</span>
         </div>
       </div>
 
       {/* Verified Role Highlights */}
       <div className="space-y-2.5 pt-4 border-t border-[#1F202B] text-xs text-[#94A3B8]">
+        <div className="flex items-start justify-between gap-2">
+          <span className="text-zinc-500 font-mono flex-shrink-0">Current Role</span>
+          <span className="text-[#F8FAFC] font-medium text-right text-[11px] sm:text-xs">
+            Videographer &amp; Editor at Indian Culinary Academy, Bangalore
+          </span>
+        </div>
         <div className="flex items-center justify-between">
-          <span className="text-zinc-500 font-mono">Current Role</span>
+          <span className="text-zinc-500 font-mono">Past Leadership</span>
           <span className="text-[#F8FAFC] font-medium">LEAD College (Media Head)</span>
         </div>
         <div className="flex items-center justify-between">

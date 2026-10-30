@@ -12,18 +12,31 @@ import {
 export default function TimelineSection() {
   const experiences = [
     {
-      period: '2025 — Present',
-      role: 'Media Head',
-      company: 'LEAD College Autonomous',
-      location: 'Palakkad, India',
+      period: 'Present',
+      role: 'Videographer & Editor',
+      company: 'Indian Culinary Academy',
+      location: 'Bangalore, Karnataka',
       badge: 'CURRENT ROLE',
       icon: Briefcase,
       achievements: [
-        'Lead complete video production, photography, editing, and social media content creation for institutional campaigns and events.',
-        'Develop content concepts and execute end-to-end production workflows, including shooting, editing, and publishing.',
+        'Direct dynamic culinary videography, masterclasses, and chef showcases for high-conversion social campaigns.',
+        'Conceptualize and edit high-retention vertical reels for Instagram, driving audience engagement and brand reach.',
+        'Manage full post-production workflow including 4K timeline editing, speed ramping, color grading, and audio mastering.'
+      ]
+    },
+    {
+      period: '2024 — 2025',
+      role: 'Media Head',
+      company: 'LEAD College Autonomous',
+      location: 'Palakkad, Kerala',
+      badge: 'INSTITUTIONAL MEDIA HEAD',
+      icon: TrendingUp,
+      achievements: [
+        'Led complete video production, photography, editing, and social media content creation for institutional campaigns and events.',
+        'Developed content concepts and executed end-to-end production workflows, including shooting, editing, and publishing.',
         'Produced and managed 100+ videos across campaigns, events, and digital content initiatives.',
         'Delivered campaign content exceeding 2M+ views, demonstrating strong audience reach and content performance.',
-        'Coordinate content planning and publishing to maintain consistent social media output and campaign visibility.'
+        'Coordinated content planning and publishing to maintain consistent social media output and campaign visibility.'
       ]
     },
     {
@@ -32,7 +45,7 @@ export default function TimelineSection() {
       company: 'Brandaid Digital',
       location: 'Palakkad, India',
       badge: 'AGENCY EXPERIENCE',
-      icon: TrendingUp,
+      icon: Briefcase,
       achievements: [
         'Managed social media presence across Instagram and Facebook, supporting brand visibility and audience engagement.',
         'Planned and maintained content calendars for consistent campaign execution and publishing schedules.',
