@@ -2,8 +2,8 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 import { InstagramIcon } from './Icons';
 
-// Directly import the image file so Vite bundles it into dist/assets
-import avatarImg from '../../public/images/sreejith-avatar.png';
+// Import the new photo from src/assets
+import avatarImg from '../assets/profile.jpeg';
 
 export default function ProfileCard() {
   return (
@@ -37,7 +37,7 @@ export default function ProfileCard() {
         <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-[#252530] shadow-xl group-hover:border-[#8B5CF6]/50 transition-colors bg-[#0E0F15]">
           <img
             src={avatarImg}
-            alt="Sreejith V P - Animated Portrait"
+            alt="Sreejith V P - Portrait"
             className="w-full h-full object-cover object-top filter contrast-105 transition-transform duration-500 group-hover:scale-105"
           />
         </div>

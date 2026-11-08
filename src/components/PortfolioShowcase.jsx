@@ -1,249 +1,210 @@
-import React, { useState } from 'react';
-import { 
-  Play, 
-  ExternalLink, 
-  Building2, 
-  Film, 
-  Sparkles, 
-  Smartphone,
-  Compass
-} from 'lucide-react';
-import { InstagramIcon } from './Icons';
-import { WORK_PROJECTS, sanitizeInstagramUrl, extractReelId } from '../data/workData';
+import React, { useState, useEffect } from 'react';
 
-export const VERIFIED_COLLECTIONS = WORK_PROJECTS;
+const SPREADSHEET_ID = '1IQr0RcZMcGYGLHG0KoaatMpFPKd6ksjfe26xX5xyxns';
 
-// Backward-compatible export
-export const VERIFIED_PROJECTS = VERIFIED_COLLECTIONS;
+// OpenSheet API reading from the exact tab names
+const PROF_API_URL = `https://opensheet.elk.sh/${SPREADSHEET_ID}/professional`;
+const PERS_API_URL = `https://opensheet.elk.sh/${SPREADSHEET_ID}/personal`;
 
-function ReelCard({ item, embedMode }) {
-  // Clean reelId and URL to ensure tracking params like ?psln= or ?cplk= are stripped
-  const cleanId = extractReelId(item.reelId || item.reelUrl);
-  const cleanUrl = sanitizeInstagramUrl(item.reelUrl || `https://www.instagram.com/reel/${cleanId}/`);
+// Direct links to open the Google Sheet
+const PROF_SHEET_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit#gid=0`;
+const PERS_SHEET_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit`;
+
+function getInstagramEmbedUrl(rawUrl) {
+  if (!rawUrl) return null;
+  const match = rawUrl.match(/(?:reel|p)\/([A-Za-z0-9_-]+)/);
+  if (match && match[1]) {
+    return `https://www.instagram.com/reel/${match[1]}/embed/`;
+  }
+  return null;
+}
+
+function ReelCard({ item, defaultTag }) {
+  const reelLink = item.ReelURL;
+  const embedUrl = getInstagramEmbedUrl(reelLink);
 
   return (
-    <div className="rounded-2xl overflow-hidden bg-[#12131A] border border-[#1F202B] hover:border-[#2D3042] transition-colors flex flex-col justify-between">
-      {/* Card Header */}
-      <div className="p-4 border-b border-[#1F202B] flex items-start justify-between gap-3">
-        <div>
-          <span className="inline-block text-[10px] font-mono font-medium uppercase px-2 py-0.5 rounded bg-[#181922] text-[#A78BFA] border border-[#1F202B] mb-1.5">
-            {item.badge}
+    <div className="bg-[#10121A] border border-white/10 rounded-2xl overflow-hidden flex flex-col group hover:border-[#8B5CF6]/50 transition duration-300">
+      {/* Top Details */}
+      <div className="p-4 pb-3 flex items-start justify-between">
+        <div className="pr-2">
+          <span className="text-[10px] font-mono tracking-wider uppercase text-[#8B5CF6] font-semibold">
+            {defaultTag}
           </span>
-          <h4 className="font-display font-bold text-sm text-[#F8FAFC] leading-snug">
-            {item.title}
+          <h4 className="text-sm font-bold text-white mt-1 line-clamp-1">
+            {item.Title || 'Untitled Project'}
           </h4>
-          <div className="text-[11px] text-[#94A3B8] mt-0.5">
-            {item.client} &bull; {item.category}
-          </div>
+          <p className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">
+            {item.Date || 'Instagram Reel'}
+          </p>
         </div>
-
-        <a
-          href={cleanUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-8 h-8 rounded-lg bg-[#181922] hover:bg-[#8B5CF6] text-[#94A3B8] hover:text-white border border-[#1F202B] flex items-center justify-center transition-colors flex-shrink-0"
-          title="Open in Instagram"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
-      </div>
-
-      {/* Reel Media: Live Embed or Fast Card */}
-      <div className="relative w-full bg-[#090A0F] flex items-center justify-center overflow-hidden min-h-[460px]">
-        {embedMode ? (
-          <iframe
-            src={`https://www.instagram.com/reel/${cleanId}/embed/`}
-            className="w-full h-[480px] border-0"
-            allowTransparency="true"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            scrolling="no"
-            loading="lazy"
-            title={item.title}
-          />
-        ) : (
-          <div className="w-full h-[460px] p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-[#12131A] to-[#090A0F]">
-            <div className="w-full flex items-center justify-between text-xs font-mono text-zinc-500">
-              <span>9:16 VERTICAL</span>
-              <span className="flex items-center gap-1 text-[#A78BFA]">
-                <InstagramIcon className="w-3 h-3" />
-                INSTAGRAM
-              </span>
-            </div>
-
-            <div className="space-y-4 my-auto">
-              <div className="w-16 h-16 rounded-full bg-[#181922] border border-[#1F202B] flex items-center justify-center mx-auto text-[#8B5CF6]">
-                <Play className="w-6 h-6 fill-current ml-0.5" />
-              </div>
-              <div>
-                <span className="text-[10px] font-mono text-[#8B5CF6] uppercase tracking-wider block mb-1">
-                  {item.category}
-                </span>
-                <h5 className="font-display font-bold text-base text-[#F8FAFC]">
-                  {item.title}
-                </h5>
-                <p className="text-xs text-[#94A3B8] mt-1">
-                  {item.role}
-                </p>
-              </div>
-            </div>
-
-            <div className="w-full text-[11px] font-mono text-zinc-500">
-              Tap below to view full video
-            </div>
-          </div>
+        {reelLink && (
+          <a
+            href={reelLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-500 hover:text-white transition text-xs mt-1"
+          >
+            ↗
+          </a>
         )}
       </div>
 
-      {/* Card Footer Details & Direct Action */}
-      <div className="p-4 bg-[#12131A] border-t border-[#1F202B] flex flex-col gap-3">
-        <div className="flex flex-wrap gap-1.5">
-          {item.tags.map((tag, tIdx) => (
-            <span
-              key={tIdx}
-              className="px-2 py-0.5 rounded bg-[#181922] text-[10px] font-mono text-[#94A3B8] border border-[#1F202B]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <a
-          href={cleanUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full py-2.5 rounded-lg bg-[#181922] hover:bg-[#8B5CF6] text-[#F8FAFC] hover:text-white border border-[#1F202B] hover:border-[#8B5CF6] text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 group"
-        >
-          <Play className="w-3.5 h-3.5 fill-current text-[#8B5CF6] group-hover:text-white" />
-          <span>Watch Reel on Instagram</span>
-          <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white" />
-        </a>
+      {/* 9:16 Frame - Loads Instagram cover & player automatically */}
+      <div className="w-full aspect-[9/16] bg-black relative flex items-center justify-center overflow-hidden">
+        {embedUrl ? (
+          <iframe
+            src={embedUrl}
+            title={item.Title || 'Reel Preview'}
+            className="w-full h-full border-0 pointer-events-auto"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <div className="text-zinc-600 text-xs">No video preview available</div>
+        )}
       </div>
     </div>
   );
 }
 
 export default function PortfolioShowcase() {
-  const [embedMode, setEmbedMode] = useState(true);
+  const [profReels, setProfReels] = useState([]);
+  const [persReels, setPersReels] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      fetch(PROF_API_URL).then((res) => (res.ok ? res.json() : [])),
+      fetch(PERS_API_URL).then((res) => (res.ok ? res.json() : []))
+    ])
+      .then(([profData, persData]) => {
+        if (Array.isArray(profData)) {
+          setProfReels(
+            profData.filter((r) => r.ReelURL && r.ReelURL.trim() !== '').reverse()
+          );
+        }
+        if (Array.isArray(persData)) {
+          setPersReels(
+            persData.filter((r) => r.ReelURL && r.ReelURL.trim() !== '').reverse()
+          );
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error fetching reels:', err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
-    <div id="projects" className="py-24 relative z-10 border-t border-[#1F202B] space-y-24">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
-        {/* Gallery Global Controls */}
-        <div className="flex items-center justify-between pb-8 mb-12 border-b border-[#1F202B]">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#8B5CF6]">
-            <Film className="w-4 h-4" />
-            <span>CURATED REEL ARCHIVES</span>
-          </div>
-
-          <button
-            onClick={() => setEmbedMode(!embedMode)}
-            className="px-3.5 py-1.5 rounded-lg text-xs font-mono bg-[#12131A] hover:bg-[#181922] border border-[#1F202B] text-[#94A3B8] hover:text-[#F8FAFC] transition-colors flex items-center gap-1.5"
-            title="Toggle Live Instagram Embeds or Fast Cards"
-          >
-            <Smartphone className="w-3.5 h-3.5 text-[#8B5CF6]" />
-            <span>{embedMode ? 'Live Embeds: ON' : 'Fast Cards: ON'}</span>
-          </button>
-        </div>
-
-        {/* ============================================================== */}
-        {/* COLLECTION 01 — PROFESSIONAL CAMPAIGN WORK                     */}
-        {/* ============================================================== */}
-        <section id="professional-work" className="mb-24">
-          <div className="max-w-3xl mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#12131A] border border-[#1F202B] text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-3">
-              <Building2 className="w-3.5 h-3.5 text-[#8B5CF6]" />
-              <span>COLLECTION 01</span>
-            </div>
-            
-            <h2 className="font-display font-bold text-2xl sm:text-4xl uppercase tracking-tight text-[#F8FAFC] mb-3">
-              01 &mdash; PROFESSIONAL &amp; CULINARY CAMPAIGN WORK
+    <div className="max-w-7xl mx-auto px-6 py-16 space-y-24">
+      {/* ================= 01 PROFESSIONAL SECTION ================= */}
+      <section id="professional">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
+          <div>
+            <span className="inline-block px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-[#8B5CF6] bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 rounded-md mb-3">
+              Collection 01
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-white leading-tight">
+              01 — Professional & Culinary Campaign Work
             </h2>
-            
-            <p className="text-sm sm:text-base text-[#94A3B8] font-light leading-relaxed">
-              Verified culinary videography, short-form reels, and commercial campaigns for Indian Culinary Academy, past institutional leadership, and agency client rosters.
+            <p className="text-zinc-400 text-sm mt-2 max-w-2xl">
+              Verified culinary videography, short-form reels, and commercial campaigns for Indian
+              Culinary Academy, past institutional leadership, and agency client rosters.
             </p>
           </div>
 
-          {/* Responsive Card Grid for Professional Work */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {VERIFIED_COLLECTIONS.professional.map((item) => (
-              <ReelCard key={item.id} item={item} embedMode={embedMode} />
+          <a
+            href={PROF_SHEET_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition duration-200 self-start sm:self-center shrink-0 cursor-pointer"
+          >
+            <span className="text-[#8B5CF6] font-bold text-sm leading-none">+</span>
+            <span>Add Professional Reel</span>
+          </a>
+        </div>
+
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="aspect-[9/16] bg-zinc-900/60 rounded-2xl animate-pulse" />
             ))}
           </div>
-        </section>
+        ) : profReels.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {profReels.map((item, idx) => (
+              <ReelCard key={`prof-${idx}`} item={item} defaultTag="COMMERCIAL / CAMPAIGN" />
+            ))}
+          </div>
+        ) : (
+          <div className="py-12 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-sm">
+            No professional reels added yet. Click &quot;Add Professional Reel&quot; to insert one.
+          </div>
+        )}
+      </section>
 
-        {/* ============================================================== */}
-        {/* COLLECTION 02 — PERSONAL CREATIVE EXPERIMENTS                  */}
-        {/* ============================================================== */}
-        <section id="personal-work" className="pt-12 border-t border-[#1F202B]">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#12131A] border border-[#1F202B] text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-3">
-                <Compass className="w-3.5 h-3.5 text-[#8B5CF6]" />
-                <span>COLLECTION 02</span>
-              </div>
+      {/* ================= 02 PERSONAL POV SECTION ================= */}
+      <section id="personal">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
+          <div>
+            <span className="inline-block px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-[#8B5CF6] bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 rounded-md mb-3">
+              Collection 02
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-white leading-tight">
+              02 — Personal Creative Experiments
+            </h2>
+            <p className="text-zinc-400 text-sm mt-2 max-w-2xl">
+              Independent content creation and visual storytelling demonstrating creative editing,
+              color grading, and passion for video production.
+            </p>
+          </div>
 
-              <h2 className="font-display font-bold text-2xl sm:text-4xl uppercase tracking-tight text-[#F8FAFC] mb-3">
-                02 &mdash; PERSONAL CREATIVE EXPERIMENTS
-              </h2>
-
-              <p className="text-sm sm:text-base text-[#94A3B8] font-light leading-relaxed">
-                Independent content creation and visual storytelling demonstrating creative editing, color grading, and passion for video production.
-              </p>
-            </div>
-
-            {/* Direct Badge / Link to @check.my_pov */}
+          <div className="flex items-center gap-3 self-start sm:self-center shrink-0">
             <a
-              href="https://www.instagram.com/check.my_pov"
+              href={PERS_SHEET_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#12131A] hover:bg-[#181922] border border-[#1F202B] hover:border-[#8B5CF6]/50 text-xs font-mono text-[#F8FAFC] transition-colors flex-shrink-0"
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition duration-200 cursor-pointer"
             >
-              <InstagramIcon className="w-4 h-4 text-[#A78BFA]" />
-              <span className="font-semibold">@check.my_pov</span>
-              <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#181922] text-[#A78BFA] border border-[#1F202B]">
-                Creator Hub
+              <span className="text-[#8B5CF6] font-bold text-sm leading-none">+</span>
+              <span>Add Personal Reel</span>
+            </a>
+
+            <a
+              href="https://www.instagram.com/check.my_pov/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-2 text-xs font-mono text-zinc-400 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition duration-200"
+            >
+              <span>@check.my_pov</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-zinc-300">
+                CREATOR HUB
               </span>
-              <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
+              <span>↗</span>
             </a>
           </div>
+        </div>
 
-          {/* 3-Card Grid for Personal POV Work */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {VERIFIED_COLLECTIONS.personal.map((item) => (
-              <ReelCard key={item.id} item={item} embedMode={embedMode} />
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="aspect-[9/16] bg-zinc-900/60 rounded-2xl animate-pulse" />
             ))}
           </div>
-
-          {/* Dedicated Creator Hub Callout Banner */}
-          <div className="mt-14 p-6 rounded-2xl bg-[#12131A] border border-[#1F202B] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#181922] border border-[#1F202B] flex items-center justify-center text-[#8B5CF6]">
-                <InstagramIcon className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="font-display font-bold text-base text-[#F8FAFC]">
-                  Follow @check.my_pov on Instagram
-                </h4>
-                <p className="text-xs text-[#94A3B8]">
-                  Explore regular street POV videos, sound design experiments, and visual hooks.
-                </p>
-              </div>
-            </div>
-            <a
-              href="https://www.instagram.com/check.my_pov"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-lg bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center gap-2 whitespace-nowrap"
-            >
-              <span>Visit @check.my_pov</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+        ) : persReels.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {persReels.map((item, idx) => (
+              <ReelCard key={`pers-${idx}`} item={item} defaultTag="CREATIVE POV" />
+            ))}
           </div>
-        </section>
-
-      </div>
+        ) : (
+          <div className="py-12 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-sm">
+            No personal POV reels added yet. Click &quot;Add Personal Reel&quot; to insert one.
+          </div>
+        )}
+      </section>
     </div>
   );
 }
